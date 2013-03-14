@@ -1,0 +1,15 @@
+﻿@fontsize: 1em;
+@fontcolor: #000;
+
+body {
+	font-size: @fontsize * 1;
+	font-color: @fontcolor;
+}
+
+.mixin {
+	display: none;
+}
+
+h1 {
+	.mixin;
+}
