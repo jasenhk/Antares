@@ -10,7 +10,9 @@ namespace Antares.Web
     {
         public static void RegisterMappings()
         {
+            Mapper.CreateMap<UserProfile, IUserInfoViewModel>();
 
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }

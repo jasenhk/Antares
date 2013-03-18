@@ -6,7 +6,6 @@ using System.Web.Security;
 
 namespace Antares.Web.Models
 {
-
     public class RegisterExternalLoginModel
     {
         [Required]

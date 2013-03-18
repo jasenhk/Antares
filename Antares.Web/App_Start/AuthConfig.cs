@@ -41,7 +41,7 @@ namespace Antares.Web
             try
             {
                 WebSecurity.InitializeDatabaseConnection(
-                    connectionStringName: "DefaultConnection",
+                    connectionStringName: "AntaresContext",
                     userTableName: "UserProfile",
                     userIdColumn: "UserId",
                     userNameColumn: "UserName",
