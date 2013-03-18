@@ -45,8 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
-    <Compile Include="DAL\UsersContext.cs" />
+    <Compile Include="DAL\AntaresContext.cs" />
     <Compile Include="Entities\Membership\Membership.cs" />
     <Compile Include="Entities\Membership\OAuthMembership.cs" />
     <Compile Include="Entities\Membership\Role.cs" />

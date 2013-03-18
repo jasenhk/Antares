@@ -1,42 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace Antares.Data
 {
-    public interface IUnitOfWork
-    {
-        UsersContext Context { get; }
-        void Save();
-    }
-
-    public class UnitOfWork : IDisposable
+    public abstract class UnitOfWork : IUnitOfWork
     {
         protected string ConnectionString;
-        private UsersContext context;
+        private AntaresContext context;
 
         public UnitOfWork(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
-        public UsersContext UsersContext
+        public AntaresContext DbContext
         {
             get
             {
-                if (context == null)
+                if (DbContext == null)
                 {
-                    context = new UsersContext(ConnectionString);
-                    return context;
+                    context = new AntaresContext(ConnectionString);
                 }
                 return context;
             }
         }
 
-        public void Save()
+        #region IUnitOfWork Members
+
+        public int Save()
         {
-            context.SaveChanges();
+            return context.SaveChanges();
         }
 
+        #endregion
+
         #region IDisposable Members
+
 
         protected virtual void Dispose(bool disposing)
         {
