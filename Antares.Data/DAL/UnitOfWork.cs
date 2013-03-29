@@ -18,7 +18,7 @@ namespace Antares.Data
         {
             get
             {
-                if (DbContext == null)
+                if (context == null)
                 {
                     context = new AntaresContext(ConnectionString);
                 }

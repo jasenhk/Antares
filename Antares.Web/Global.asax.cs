@@ -26,7 +26,7 @@ namespace Antares.Web
             AutoMapConfig.RegisterMappings();
             UnityConfig.Initialise(new UnityConfigParameters
             {
-                ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString,
+                ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["AntaresContext"].ConnectionString,
                 Filters = GlobalFilters.Filters
             });
         }

@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using Unity.Mvc3;
 using Antares.Data;
+using Antares.Web.Common;
 
 namespace Antares.Web
 {
@@ -24,7 +25,9 @@ namespace Antares.Web
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
-            container.RegisterType<UnitOfWork>(new HierarchicalLifetimeManager(), new InjectionConstructor(parameters.ConnectionString));
+            container.RegisterInstance<IAppSettings>(AppSettings.Current);
+            container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager(), new InjectionConstructor(parameters.ConnectionString));
+
 
             //container.RegisterType<IUserProfileRepository, UserProfileRepository>();
 
