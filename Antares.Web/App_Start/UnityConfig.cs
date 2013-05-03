@@ -27,7 +27,8 @@ namespace Antares.Web
 
             container.RegisterInstance<IAppSettings>(AppSettings.Current);
             container.RegisterType<IUnitOfWork, UnitOfWork>(new HierarchicalLifetimeManager(), new InjectionConstructor(parameters.ConnectionString));
-
+            container.RegisterType(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            container.RegisterType<IMembershipService, MembershipService>();
 
             //container.RegisterType<IUserProfileRepository, UserProfileRepository>();
 

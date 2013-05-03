@@ -22,6 +22,7 @@ namespace Antares.Web
             //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);  // this is done in UnityConfig
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            SimpleMembershipConfig.Initialize();
             AuthConfig.RegisterAuth();
             AutoMapConfig.RegisterMappings();
             UnityConfig.Initialise(new UnityConfigParameters

@@ -37,21 +37,6 @@ namespace Antares.Web
             //OAuthWebSecurity.RegisterYahooClient();
 
             #endregion
-
-            try
-            {
-                WebSecurity.InitializeDatabaseConnection(
-                    connectionStringName: "AntaresContext",
-                    userTableName: "UserProfile",
-                    userIdColumn: "UserId",
-                    userNameColumn: "UserName",
-                    autoCreateTables: false
-                    );
-            }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("The ASP.NET SimpleMembership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
-            }
         }
     }
 }

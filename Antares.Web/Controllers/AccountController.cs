@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 //using Antares.Web.Filters;
 using Antares.Web.Models;
 using Antares.Data;
+using Antares.Web.Common;
 
 namespace Antares.Web.Controllers
 {
@@ -18,6 +19,13 @@ namespace Antares.Web.Controllers
     //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private IMembershipService membershipService;
+
+        public AccountController(IMembershipService membershipService)
+        {
+            this.membershipService = membershipService;
+        }
+
         //
         // GET: /Account/Login
 
@@ -284,6 +292,22 @@ namespace Antares.Web.Controllers
                 //        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
                 //    }
                 //}
+
+                UserProfile user = membershipService.GetUserByUserName(model.UserName);
+
+                if (user != null)
+                {
+                    membershipService.Add(new UserProfile { UserName = model.UserName });
+
+                    OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
+                    OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
+
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                }
             }
 
             ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;

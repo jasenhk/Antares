@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace Antares.Data
 {
-    public abstract class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         protected string ConnectionString;
         private AntaresContext context;
