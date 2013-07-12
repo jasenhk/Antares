@@ -7,7 +7,7 @@ using Antares.Web.Common;
 
 namespace Antares.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {

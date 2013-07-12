@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Web;
 
-namespace Antares.Web
+namespace Antares.Web.Common
 {
     public interface ISessionWrapper
     {
-
+        //DateTime TimeStarted { get; set; }
     }
 
     /// <summary>
@@ -15,10 +15,12 @@ namespace Antares.Web
     public class SessionWrapper : ISessionWrapper
     {
         private const string SessionKey = "__MySession__";
+        //private readonly DateTime timeStarted;
 
         private SessionWrapper()
         {
             // initialize and set default values
+            //this.timeStarted = DateTime.Now;
         }
 
         public static ISessionWrapper Current
@@ -30,7 +32,7 @@ namespace Antares.Web
                 if (session == null)
                 {
                     session = new SessionWrapper();
-                    HttpContext.Current.Session[SessionKey] = session;
+                    HttpContext.Current.Session[SessionKey] = session;                    
                 }
                 return session;
             }
@@ -38,7 +40,7 @@ namespace Antares.Web
 
         #region Session Items
 
-        // public Foo Foo { get; set; }
+        //public DateTime TimeStarted { get; set; }
 
         #endregion
     }

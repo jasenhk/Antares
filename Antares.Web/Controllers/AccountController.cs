@@ -12,12 +12,13 @@ using WebMatrix.WebData;
 using Antares.Web.Models;
 using Antares.Data;
 using Antares.Web.Common;
+using Antares.Web.Services;
 
 namespace Antares.Web.Controllers
 {
     [Authorize]
     //[InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private IMembershipService membershipService;
 
@@ -44,7 +45,14 @@ namespace Antares.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            //if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            //{
+            //    return RedirectToLocal(returnUrl);
+            //}
+            var user = membershipService.GetUserByUserName("jasen");
+            membershipService.SetRole(user, 2);
+            
+            if (ModelState.IsValid && membershipService.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -61,7 +69,8 @@ namespace Antares.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+            //WebSecurity.Logout();
+            membershipService.Logout();
 
             return RedirectToAction("Index", "Home");
         }
@@ -89,7 +98,8 @@ namespace Antares.Web.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    //WebSecurity.Login(model.UserName, model.Password);
+                    membershipService.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

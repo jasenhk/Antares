@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 
-namespace Antares.Web
+namespace Antares.Web.Common
 {
     public interface IAppSettings
     {
